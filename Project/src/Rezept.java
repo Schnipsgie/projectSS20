@@ -52,15 +52,12 @@ public class Rezept {
 		
 		StringBuilder stringBuilder = new StringBuilder();
 		for (String zutat : zutaten) {
-			stringBuilder.append(zutat + " ; ");
+			stringBuilder.append(zutat + ";");
 		}
-		String content = rname + " ; " + stringBuilder.toString();		
+		String content = rname + ";" + stringBuilder.toString();		
 		FH.writeFile(content);
 	}
 	
-	public void remove() {
-		FileHandler FH = new FileHandler();
-		
-	}
+	
 	
 }

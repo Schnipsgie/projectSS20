@@ -14,11 +14,39 @@ public class FileHandler {
 	
 	private File file;
 	
-
+	
+	public void createNewFile(Vector<Rezept> s) {
+		String name = getFile().getName();
+		getFile().delete();
+		
+		
+		setFile(createFile(name));
+		System.out.println(getFile().getAbsolutePath());
+		
+		try {
+			FileWriter writer = new FileWriter(getFile().getAbsolutePath(),true);
+			
+			for (Rezept Rezept : s) {
+				writer.write(Rezept.getRezeptName());
+				
+				for (String zutat : Rezept.getZutaten()) {
+					writer.write(";" + zutat );	
+				}
+				writer.write("\n");
+			}
+			writer.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
 	
 	private File createFile(String filename) {
 	  try {
-	      File file = new File(filename + ".csv");
+	      File file = new File(filename);
 	      if (file.createNewFile()) {
 	        System.out.println("File erstellt unter " + file.getAbsolutePath() + " ! ");
 	      }
@@ -86,7 +114,7 @@ public class FileHandler {
 	//Basic Constructor
 	FileHandler(){
 		 System.out.print("Used Path Constructor without parameter \n");
-		 setFile(createFile("testfile"));
+		 setFile(createFile("testfile.csv"));
 		
 	}
 

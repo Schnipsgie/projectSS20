@@ -13,6 +13,14 @@ public class TableMainForm {
 	private JTable table;
 	private Vector<Rezept> rezeptListe;
 	
+	public void saveChanges() {
+		
+		FileHandler FH =  new FileHandler();
+		FH.createNewFile(getRezeptListe());
+		
+		
+	}
+	
 	
 	public void generateTable(Vector<Rezept> rezeptListe) {
 		
@@ -84,7 +92,11 @@ public class TableMainForm {
 	
 	
 	public void reload() {
-		getFenster().repaint();	
+	
+		getFenster().invalidate();
+		getFenster().validate();
+		getFenster().repaint();
+		getFenster().setVisible(true);
 	}
 
 	private JFrame getFenster() {

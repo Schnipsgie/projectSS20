@@ -28,13 +28,24 @@ public class InputHandler implements ActionListener{
 	
 		}
 		else if (event.getActionCommand() == "Tabelle neu Laden") {
-			System.out.println("Reloading Main Frame");
+			//System.out.println("Reloading Main Frame");
 			mainForm.reload();
 		}
 		else if (event.getActionCommand() == "Remove") {
 			//System.out.println(mainForm.getTable().getValueAt(mainForm.getTable().getSelectedRow(), 0));
 			
-			System.out.println(mainForm.getRezeptListe().get(mainForm.getTable().getSelectedRow()));
+			//System.out.println(mainForm.getRezeptListe().get(mainForm.getTable().getSelectedRow()));
+			FileHandler FH = new FileHandler();
+			
+			
+			//System.out.println(cont.indexOf(cont.contains(mainForm.getRezeptListe().get(mainForm.getTable().getSelectedRow()))));
+			mainForm.getRezeptListe().remove(mainForm.getRezeptListe().get(mainForm.getTable().getSelectedRow()));
+			
+			System.out.println(mainForm.getRezeptListe().toString());
+			//cont.remove();
+			mainForm.saveChanges();
+			//FH.createNewFile(cont);
+			
 			
 		}
 		

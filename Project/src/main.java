@@ -18,7 +18,13 @@ import java.util.Vector;
 public class main {
 
 	public static void main(String[] args) {
+		
+	initialLoading();
+        
+	}
 
+	
+	public static void initialLoading(){
 		Vector<Rezept> rezeptListe = new Vector<Rezept>();
 
 		//initial Loading
@@ -34,7 +40,5 @@ public class main {
 			
 		
 		TableMainForm tableMainForm = new TableMainForm(rezeptListe);
-        
-	}
-
+		}
 }
