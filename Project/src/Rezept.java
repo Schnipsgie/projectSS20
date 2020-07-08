@@ -58,4 +58,9 @@ public class Rezept {
 		FH.writeFile(content);
 	}
 	
+	public void remove() {
+		FileHandler FH = new FileHandler();
+		
+	}
+	
 }
