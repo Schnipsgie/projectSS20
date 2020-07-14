@@ -1,12 +1,14 @@
 import java.util.Vector;
 
+import javax.swing.text.TabExpander;
+
 //Requirements:
 //
 //DONE	1)Der Benutzer soll neue Objekte anlegen können.
 //		2)Objekte sollen anhand des Namens eindeutig identifizierbar sein.
 //		3)Objekte sollen folgende Bestandteile besitzen: eindeutiger Name,Freitext und eine beliebige Anzahl an Elementen mit Mengenangabe, Einheit und Bezeichnung.
 //		4)Der Benutzer soll Objekte anhand der Bestandteile suchen können.
-//		5)Der Benutzer soll Objekte löschen können.
+//DONE	5)Der Benutzer soll Objekte löschen können.
 //		6)Der Benutzer soll Objekte bearbeiten können.
 //		7)Der Benutzer soll ein Objekt auswählen können,um diesesanzuzeigen.
 //DONE	8)Die Anwendung soll eine Übersichtsliste aller Objekte anzeigen.
@@ -41,4 +43,8 @@ public class main {
 		
 		TableMainForm tableMainForm = new TableMainForm(rezeptListe);
 		}
+	
+	
+	
+
 }

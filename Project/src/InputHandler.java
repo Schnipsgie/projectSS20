@@ -8,13 +8,12 @@ import javax.swing.JTextField;
 public class InputHandler implements ActionListener{
 	
 	InputForm inputFormElement;
-	TableMainForm mainForm;
+	private TableMainForm mainForm;
 	
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if (event.getActionCommand() == "Add") {
-			System.out.println("Add Button wurde gedrückt");
-			InputForm InpForm = new InputForm(4);
+			InputForm InpForm = new InputForm(4, getMainForm());
 		}
 		else if(event.getActionCommand() == "Hinzufügen") {
 			
@@ -25,27 +24,26 @@ public class InputHandler implements ActionListener{
 			}
 						
 			Rezept newRezept = new Rezept(this.inputFormElement.getRezName().getText(), zutaten);
+			
+			getMainForm().generateRezeptliste();
+			getMainForm().reload();
+			
+			
+			
 	
 		}
 		else if (event.getActionCommand() == "Tabelle neu Laden") {
-			//System.out.println("Reloading Main Frame");
-			mainForm.reload();
+			getMainForm().reload();
 		}
 		else if (event.getActionCommand() == "Remove") {
-			//System.out.println(mainForm.getTable().getValueAt(mainForm.getTable().getSelectedRow(), 0));
-			
-			//System.out.println(mainForm.getRezeptListe().get(mainForm.getTable().getSelectedRow()));
+		
 			FileHandler FH = new FileHandler();
+
+			getMainForm().getRezeptListe().remove(getMainForm().getRezeptListe().get(getMainForm().getTable().getSelectedRow()));
 			
-			
-			//System.out.println(cont.indexOf(cont.contains(mainForm.getRezeptListe().get(mainForm.getTable().getSelectedRow()))));
-			mainForm.getRezeptListe().remove(mainForm.getRezeptListe().get(mainForm.getTable().getSelectedRow()));
-			
-			System.out.println(mainForm.getRezeptListe().toString());
-			//cont.remove();
-			mainForm.saveChanges();
-			//FH.createNewFile(cont);
-			
+			System.out.println(getMainForm().getRezeptListe().toString());
+			getMainForm().saveChanges();
+			getMainForm().reload();
 			
 		}
 		
@@ -53,19 +51,30 @@ public class InputHandler implements ActionListener{
 	}
 
 	
-	public InputHandler(InputForm inp) {
-	
+	public InputHandler(InputForm inp , TableMainForm mainForm) {
+		this.setMainForm(mainForm);
 		this.inputFormElement = inp;
+		
 	
 	}
 	
 	public InputHandler(TableMainForm mainForm) {
 		
-		 this.mainForm = mainForm;
+		 this.setMainForm(mainForm);
 		
 	}
 	
-	public InputHandler() {}	
+	public InputHandler() {}
+
+
+	public TableMainForm getMainForm() {
+		return mainForm;
+	}
+
+
+	private void setMainForm(TableMainForm mainForm) {
+		this.mainForm = mainForm;
+	}	
 	
 }
 

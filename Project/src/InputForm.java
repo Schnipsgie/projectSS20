@@ -11,11 +11,12 @@ public class InputForm {
 	
 	private JTextField rezName;
 	private Vector<JTextField> zutaten = new Vector<JTextField>();
+
 	
- public void openInputForm(int zutCount) {
+ public void openInputForm(int zutCount, TableMainForm tmf) {
 	 
 	 
-	 InputHandler IH = new InputHandler(this);
+	 InputHandler IH = new InputHandler(this , tmf);
 	 JFrame InputFenster = new JFrame("Neues Rezept hinzufügen");
 	 InputFenster.setSize(600, 250);
 	 GridLayout gridlayout = new GridLayout(2, 1 , 40 , 0); //Layout festlegen
@@ -70,10 +71,9 @@ public class InputForm {
  
  
  
- public InputForm(int count) {
-	 openInputForm (count); 
+ public InputForm(int count , TableMainForm tmf) {
+	 openInputForm (count, tmf); 
  }
-
 
 
 JTextField getRezName() {
@@ -97,5 +97,6 @@ Vector<JTextField> getZutaten() {
 void setZutaten(JTextField zutat) {
 	this.zutaten.addElement(zutat);;
 }
+
 
 }

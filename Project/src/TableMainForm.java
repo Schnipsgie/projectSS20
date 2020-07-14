@@ -11,6 +11,7 @@ import javax.swing.ListSelectionModel;
 public class TableMainForm {
 	private JFrame fenster;
 	private JTable table;
+	private JScrollPane scrollPane;
 	private Vector<Rezept> rezeptListe;
 	
 	public void saveChanges() {
@@ -20,7 +21,6 @@ public class TableMainForm {
 		
 		
 	}
-	
 	
 	public void generateTable(Vector<Rezept> rezeptListe) {
 		
@@ -57,9 +57,9 @@ public class TableMainForm {
 				setRezeptListe(rezeptListe);
 	
 		//Hauptfester erstellen
-				fenster = new JFrame("Rezepte");
-				fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Programm wird beendet wenn es geschlossen wird
-				fenster.setSize(600, 250);
+				setFenster(new JFrame("Rezepte"));
+				getFenster().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Programm wird beendet wenn es geschlossen wird
+				getFenster().setSize(600, 250);
 				//Menü
 				JMenuBar menuLeiste = new JMenuBar();
 				JMenu menuOptionBearbeiten = new JMenu("Bearbeiten");
@@ -76,27 +76,52 @@ public class TableMainForm {
 				menuOptionBearbeiten.add(menuItemReload);
 			    menuLeiste.add(menuOptionBearbeiten);
 			    menuLeiste.add(menuOptionStatistik);
-		        fenster.setJMenuBar(menuLeiste);
+			    getFenster().setJMenuBar(menuLeiste);
 
 		        generateTable(rezeptListe);
 		        
 		        JScrollPane scrollPane = new JScrollPane(getTable());
-		        fenster.add(scrollPane);
-		       
-		        fenster.setVisible(true);
+		        getFenster().add(scrollPane);
+		        setScrollPane(scrollPane);
+		        getFenster().setVisible(true);
 	
 	
 	}
 	
 
-	
+	public void generateRezeptliste() {
+		Vector<Rezept> rezeptListe = new Vector<Rezept>();
+
+		//initial Loading
+		FileHandler FH = new FileHandler();
+		
+
+		Vector<String> rezeptDataList = FH.readFile();
+		for (String rezeptData : rezeptDataList) {
+			System.out.println(rezeptData);
+			Rezept currentRezept =  new Rezept(rezeptData);
+			rezeptListe.add(currentRezept);
+		}
+		
+		setRezeptListe(rezeptListe);
+		
+	}
 	
 	public void reload() {
-	
-		getFenster().invalidate();
-		getFenster().validate();
+		System.out.println("reload");
+		generateTable(getRezeptListe());
+		
+		getFenster().remove(getScrollPane());
+		
+		JScrollPane scrollPane = new JScrollPane(getTable());
+	    getFenster().add(scrollPane);
+	    setScrollPane(scrollPane);
+		
 		getFenster().repaint();
-		getFenster().setVisible(true);
+        getFenster().revalidate();
+        getFenster().validate();
+	
+		
 	}
 
 	private JFrame getFenster() {
@@ -109,6 +134,7 @@ public class TableMainForm {
 
 	private void setTable(JTable table) {
 		this.table = table;
+		System.out.println("tabelle gesetzt");
 	}
 
 	protected JTable getTable() {
@@ -121,5 +147,15 @@ public class TableMainForm {
 
 	void setRezeptListe(Vector<Rezept> rezeptListe) {
 		this.rezeptListe = rezeptListe;
+	}
+
+
+	public JScrollPane getScrollPane() {
+		return scrollPane;
+	}
+
+
+	public void setScrollPane(JScrollPane scrollPane) {
+		this.scrollPane = scrollPane;
 	}
 }
