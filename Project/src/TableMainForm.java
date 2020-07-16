@@ -7,18 +7,32 @@ import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
-public class TableMainForm {
+
+public class TableMainForm extends JFrame{
 	private JFrame fenster;
 	private JTable table;
 	private JScrollPane scrollPane;
 	private Vector<Rezept> rezeptListe;
+	private TableRowSorter<TableModel> sorter;
 	
 	public void saveChanges() {
 		
 		FileHandler FH =  new FileHandler();
 		FH.createNewFile(getRezeptListe());
 		
+		
+	}
+	
+	
+	public void filter(String filter) {
+		
+		 getSorter().setRowFilter(RowFilter.regexFilter(filter));
+
 		
 	}
 	
@@ -42,8 +56,12 @@ public class TableMainForm {
 	        columnNames.addElement("Column 5");
 	        columnNames.addElement("Column 6");
 	       
+	        TableModel model = new DefaultTableModel(tableData, columnNames);
+	        JTable table = new JTable (model);
+	        setSorter(new TableRowSorter<TableModel>(model));
+	        table.setRowSorter(getSorter());
+	       
 	        
-	        JTable table = new JTable (tableData, columnNames);
 	        table.setSelectionMode( ListSelectionModel.SINGLE_SELECTION  );
 	        table.setRowSelectionAllowed(true);
 	        table.setColumnSelectionAllowed(false);
@@ -63,17 +81,21 @@ public class TableMainForm {
 				//Menü
 				JMenuBar menuLeiste = new JMenuBar();
 				JMenu menuOptionBearbeiten = new JMenu("Bearbeiten");
+				
 				JMenu menuOptionStatistik = new JMenu("Statistik");
 				JMenuItem menuItemAdd = new JMenuItem("Add");
 				JMenuItem menuItemRemove = new JMenuItem("Remove");
 				JMenuItem menuItemReload = new JMenuItem("Tabelle neu Laden");
+				JMenuItem menuItemSort = new JMenuItem("Sortieren");
 				menuItemAdd.addActionListener(IH);
 				menuItemRemove.addActionListener(IH);
 				menuItemReload.addActionListener(IH);
+				menuItemSort.addActionListener(IH);
 				
 				menuOptionBearbeiten.add(menuItemAdd);
 				menuOptionBearbeiten.add(menuItemRemove);
 				menuOptionBearbeiten.add(menuItemReload);
+				menuOptionBearbeiten.add(menuItemSort);
 			    menuLeiste.add(menuOptionBearbeiten);
 			    menuLeiste.add(menuOptionStatistik);
 			    getFenster().setJMenuBar(menuLeiste);
@@ -157,5 +179,15 @@ public class TableMainForm {
 
 	public void setScrollPane(JScrollPane scrollPane) {
 		this.scrollPane = scrollPane;
+	}
+
+
+	private TableRowSorter<TableModel> getSorter() {
+		return sorter;
+	}
+
+
+	private void setSorter(TableRowSorter<TableModel> sorter) {
+		this.sorter = sorter;
 	}
 }

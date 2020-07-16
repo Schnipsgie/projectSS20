@@ -46,8 +46,12 @@ public class InputHandler implements ActionListener{
 			getMainForm().reload();
 			
 		}
+		else if (event.getActionCommand() == "Sortieren") {
+			
+			SortForm SF = new SortForm(getMainForm());
+			
+		}
 		
-	
 	}
 
 	
