@@ -44,17 +44,19 @@ public class TableMainForm extends JFrame{
 	        for (Rezept currentRezept : rezeptListe) {
 	        	Vector<String> baseList = new Vector<>(); 
 	        	baseList.add(currentRezept.getRezeptName());
-	        	baseList.addAll(currentRezept.getZutaten());
+	        	baseList.add(currentRezept.getText());
+	        	baseList.addAll(currentRezept.getAllZuatatenAsString());
 	        	tableData.addElement(baseList);
 	        }
 	        
 	        Vector<String> columnNames = new Vector<String>();
 	        columnNames.addElement("Rezeptname");
-	        columnNames.addElement("Column 2");
-	        columnNames.addElement("Column 3");
-	        columnNames.addElement("Column 4");
-	        columnNames.addElement("Column 5");
-	        columnNames.addElement("Column 6");
+	        columnNames.addElement("Beschreibung");
+	        columnNames.addElement("Zutat 1");
+	        columnNames.addElement("Zutat 2");
+	        columnNames.addElement("Zutat 3");
+	        columnNames.addElement("Zutat 4");
+	        columnNames.addElement("Zutat 5");
 	       
 	        TableModel model = new DefaultTableModel(tableData, columnNames);
 	        JTable table = new JTable (model);

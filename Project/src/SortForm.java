@@ -25,13 +25,26 @@ public class SortForm extends JFrame {
 		Vector<Rezept> rezVect  = getTmf().getRezeptListe();
 		
 		for (Rezept reZ :  rezVect) {
-			for (String zut :  reZ.getZutaten()) {
-				if (availZutaten.indexOf(zut) == -1) {
-					availZutaten.add(zut); 
+			for (Zutat zut :  reZ.getZutaten()) {
+						
+				if (availZutaten.indexOf(zut.getZutatenName()) == -1) {
+					availZutaten.add(zut.getZutatenName()); 
 				}
 			}
 			
 		}
+		
+		
+
+		
+//		for (Rezept reZ :  rezVect) {
+//			for (String zut :  reZ.getAllZuatatenAsString()) {
+//				if (availZutaten.indexOf(zut) == -1) {
+//					availZutaten.add(zut); 
+//				}
+//			}
+//			
+//		}
 		SortHandler sh = new SortHandler(availZutaten, tmf);
 		
 		JComboBox sortComboBox = new JComboBox(availZutaten);

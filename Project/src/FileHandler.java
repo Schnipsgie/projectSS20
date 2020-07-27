@@ -29,7 +29,7 @@ public class FileHandler {
 			for (Rezept Rezept : s) {
 				writer.write(Rezept.getRezeptName());
 				
-				for (String zutat : Rezept.getZutaten()) {
+				for (String zutat : Rezept.getAllZuatatenAsString()) {
 					writer.write(";" + zutat );	
 				}
 				writer.write("\n");

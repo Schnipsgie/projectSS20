@@ -10,7 +10,8 @@ import java.util.regex.Pattern;
 public class Rezept {
 	
 	private String rezeptName;
-	private Vector<String> zutaten;
+	private String text;
+	private Vector<Zutat> zutaten;
 	
 	public String getRezeptName() {
 		return rezeptName;
@@ -20,42 +21,75 @@ public class Rezept {
 		this.rezeptName = rezeptName;
 	}
 
-	public Vector<String> getZutaten() {
+	public Vector<Zutat> getZutaten() {
 		return zutaten;
 	}
 
-	public void setZutaten(Vector<String> zutaten) {
+	public void setZutaten(Vector<Zutat> zutaten) {
 		this.zutaten = zutaten;
 	}
 
+	
+	public Vector<String> getAllZuatatenAsString() {
+		
+		Vector<String> s =  new Vector<String>();
+		for (Zutat z : getZutaten()) {
+			s.add(z.getAsString());
+		}
+		
+		return s;
+		
+	}
 	
 	protected Rezept(String line) {
 		String[] s = line.split(Pattern.quote( ";" ));
 		
 		Vector<String> ve = new Vector<String>(Arrays.asList(s));
-		
-		setRezeptName(ve.get(0));
-		ve.remove(0);
-	    setZutaten(ve);
-		System.out.println(getRezeptName());
-		for (String z : zutaten) {
-			System.out.print(z);
+		//name setzen
+		if (ve.get(0) != null) {
+			setRezeptName(ve.get(0));
+			ve.remove(0);
 		}
-		System.out.println("\n");
+		// beschreibung setzen
+		if (ve.get(0) != null) {
+			setText(ve.get(0));
+			ve.remove(0);	
+		}
+		Vector<Zutat> zutatenVector = new Vector<Zutat>();
+		for (String cont : ve) {
+				String[] zua = cont.split(Pattern.quote( "," ));
+				Vector<String> splitZutat = new Vector<String>(Arrays.asList(zua));
+				
+				if (splitZutat.size() == 3) {
+					Zutat zu = new Zutat(Integer.parseInt(splitZutat.get(0)), splitZutat.get(1), splitZutat.get(2));
+					zutatenVector.add(zu);
+				}
+			
+		}
+	    setZutaten(zutatenVector);
 	}
 	
-	public Rezept(String rname , Vector<String> zutaten) {
+	public Rezept(String rname, String betext  , Vector<Zutat> zutaten) {
 		setRezeptName(rname);
+		setText(betext);
 		setZutaten(zutaten);
 		
 		FileHandler FH = new FileHandler();
 		
 		StringBuilder stringBuilder = new StringBuilder();
-		for (String zutat : zutaten) {
-			stringBuilder.append(zutat + ";");
+		for (Zutat zutat : zutaten) {
+			stringBuilder.append(zutat.getAsString() + ";");
 		}
-		String content = rname + ";" + stringBuilder.toString();		
+		String content = rname + ";" + betext + ";" + stringBuilder.toString();		
 		FH.writeFile(content);
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
 	}
 	
 	

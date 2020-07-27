@@ -35,7 +35,7 @@ public class main {
 
 		Vector<String> rezeptDataList = FH.readFile();
 		for (String rezeptData : rezeptDataList) {
-			//System.out.println(rezeptLine);
+			
 			Rezept currentRezept =  new Rezept(rezeptData);
 			rezeptListe.add(currentRezept);
 		}

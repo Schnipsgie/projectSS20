@@ -17,14 +17,21 @@ public class InputHandler implements ActionListener{
 		}
 		else if(event.getActionCommand() == "Hinzufügen") {
 			
-			Vector<String> zutaten = new Vector<String>();
+			Vector<Zutat> zutaten = new Vector<Zutat>();
 	
-			for (JTextField zutatenTextField : this.inputFormElement.getZutaten()) {
-				zutaten.add(zutatenTextField.getText());		
+			for (Vector<JTextField> zutatenTextField : this.inputFormElement.getZutaten()) {
+	
+				int i = 0;
+				try {
+					i = Integer.parseInt(zutatenTextField.get(0).getText());
+					Zutat zu = new Zutat(i , zutatenTextField.get(1).getText(), zutatenTextField.get(2).getText());
+					zutaten.add(zu);
+				} catch (NumberFormatException e) {}
+		
 			}
 						
-			Rezept newRezept = new Rezept(this.inputFormElement.getRezName().getText(), zutaten);
-			
+			Rezept newRezept = new Rezept(this.inputFormElement.getRezName().getText(), this.inputFormElement.getRezText().getText(), zutaten);
+		
 			getMainForm().generateRezeptliste();
 			getMainForm().reload();
 			
