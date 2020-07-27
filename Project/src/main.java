@@ -7,7 +7,7 @@ import javax.swing.text.TabExpander;
 //DONE	1)Der Benutzer soll neue Objekte anlegen können.
 //		2)Objekte sollen anhand des Namens eindeutig identifizierbar sein.
 //		3)Objekte sollen folgende Bestandteile besitzen: eindeutiger Name,Freitext und eine beliebige Anzahl an Elementen mit Mengenangabe, Einheit und Bezeichnung.
-//		4)Der Benutzer soll Objekte anhand der Bestandteile suchen können.
+//DONE?	4)Der Benutzer soll Objekte anhand der Bestandteile suchen können.
 //DONE	5)Der Benutzer soll Objekte löschen können.
 //		6)Der Benutzer soll Objekte bearbeiten können.
 //		7)Der Benutzer soll ein Objekt auswählen können,um diesesanzuzeigen.
