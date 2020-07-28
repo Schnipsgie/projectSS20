@@ -27,8 +27,8 @@ public class FileHandler {
 			FileWriter writer = new FileWriter(getFile().getAbsolutePath(),true);
 			
 			for (Rezept Rezept : s) {
-				writer.write(Rezept.getRezeptName());
-				
+				writer.write(Rezept.getRezeptName() + ";");
+				writer.write(Rezept.getText());
 				for (String zutat : Rezept.getAllZuatatenAsString()) {
 					writer.write(";" + zutat );	
 				}

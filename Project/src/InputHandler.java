@@ -1,8 +1,14 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.TreeMap;
 import java.util.Vector;
 
 import javax.swing.JTextField;
+
+
 
 
 public class InputHandler implements ActionListener{
@@ -41,7 +47,27 @@ public class InputHandler implements ActionListener{
 		}
 		else if (event.getActionCommand() == "Diagramm") {
 			
-			BarChartForm barChart =  new BarChartForm(getMainForm().getRezeptListe());
+			HashMap<String, Integer> unsortetMap = new HashMap<String, Integer>();
+			Vector<Rezept> rezVect  = getMainForm().getRezeptListe();
+			
+			for (Rezept reZ :  rezVect) {
+				for (Zutat zut :  reZ.getZutaten()) {
+					
+					if (!unsortetMap.containsKey(zut.getZutatenName())) {
+						unsortetMap.put(zut.getZutatenName(), 1);
+						System.out.println(zut.getZutatenName());
+					}
+					else {
+						int i = unsortetMap.get(zut.getZutatenName());
+						unsortetMap.replace(zut.getZutatenName(), ++i);
+						
+					}
+				}
+				
+			}
+			
+			
+			BarChartForm barChart =  new BarChartForm(unsortetMap);
 			
 		}
 		else if (event.getActionCommand() == "Tabelle neu Laden") {

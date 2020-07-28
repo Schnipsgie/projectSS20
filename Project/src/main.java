@@ -13,9 +13,9 @@ import javax.swing.text.TabExpander;
 //		7)Der Benutzer soll ein Objekt auswählen können,um diesesanzuzeigen.
 //DONE	8)Die Anwendung soll eine Übersichtsliste aller Objekte anzeigen.
 //DONE	9)Die Anwendung soll beim Start automatisch alle gespeicherten Daten laden.
-//		10)Die Anwendung soll eine grafische Übersicht über die nach Menge absteigend sortierten Elementen ausgeben können.
-//			Bei großer Anzahl unterschiedlicherElemente sollen nur die häufigstenangezeigt werden. 
-//			Dies soll in Form eines Balkendiagramms geschehen.
+//so halb		10)Die Anwendung soll eine grafische Übersicht über die nach Menge absteigend sortierten Elementen ausgeben können.
+//DONE?			Bei großer Anzahl unterschiedlicherElemente sollen nur die häufigstenangezeigt werden. 
+//DONE			Dies soll in Form eines Balkendiagramms geschehen.
 
 public class main {
 

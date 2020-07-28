@@ -1,4 +1,4 @@
-import java.awt.event.ActionListener;
+
 import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -34,17 +34,6 @@ public class SortForm extends JFrame {
 			
 		}
 		
-		
-
-		
-//		for (Rezept reZ :  rezVect) {
-//			for (String zut :  reZ.getAllZuatatenAsString()) {
-//				if (availZutaten.indexOf(zut) == -1) {
-//					availZutaten.add(zut); 
-//				}
-//			}
-//			
-//		}
 		SortHandler sh = new SortHandler(availZutaten, tmf);
 		
 		JComboBox sortComboBox = new JComboBox(availZutaten);
