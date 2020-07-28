@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -20,6 +21,12 @@ public class TableMainForm extends JFrame{
 	private Vector<Rezept> rezeptListe;
 	private TableRowSorter<TableModel> sorter;
 	
+	
+	/**
+	 * Saves the "Vector<Rezept> rezeptListe"
+	 * 
+	 */
+	
 	public void saveChanges() {
 		
 		FileHandler FH =  new FileHandler();
@@ -28,6 +35,47 @@ public class TableMainForm extends JFrame{
 		
 	}
 	
+	/**
+	 * 
+	 * 
+	 * converts the Jtable with the current (and / or modified data) to "Vector<Rezept> rezeptListe"
+	 * 
+	 * 
+	 */
+	public void save() {
+		
+		int columnCount = table.getModel().getColumnCount();
+		int rowCount = table.getModel().getRowCount();
+		
+		
+		Vector<Rezept> newRezList = new Vector<Rezept>();
+		
+		for (int i = 0; i < rowCount; i++) {
+			Vector<Zutat> neuZutaten = new Vector<Zutat>();
+			for (int j = 2; j < columnCount; ++j) {
+				
+				if (table.getModel().getValueAt(i, j) != null) {
+					if(!table.getModel().getValueAt(i, j).equals("")) {
+						
+						Zutat z;
+						try {
+							z = new Zutat(table.getModel().getValueAt(i, j).toString());
+							neuZutaten.add(z);
+						} catch (Exception e) {
+							JOptionPane.showMessageDialog(null, "Error : " + table.getModel().getValueAt(i, j).toString() + " hat nicht das Richtige Format");
+						}
+						
+					}
+				}
+			}
+			Rezept re = new Rezept(table.getValueAt(i, 0).toString() ,table.getValueAt(i, 1).toString(), neuZutaten);
+			System.out.println(table.getValueAt(i, 0).toString());
+			newRezList.add(re);
+			
+		}
+		setRezeptListe(newRezList);
+		saveChanges();
+	}
 	
 	public void filter(String filter) {
 		

@@ -1,3 +1,6 @@
+import java.util.Vector;
+
+import javax.swing.JOptionPane;
 
 public class Zutat {
 
@@ -20,6 +23,24 @@ public class Zutat {
 		
 	}
 	
+	public Zutat(String content) throws Exception{
+		try {
+			String[] v = content.split(",");
+			
+			Integer.parseInt(v[0]);
+			
+			
+			setAnzahl(Integer.parseInt(v[0]));
+			setEinheit(v[1]);
+			setZutatenName(v[2]);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			
+			throw new Exception();
+		}
+		
+	}
+
 	public String getAsString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append(getAnzahl() + ",");

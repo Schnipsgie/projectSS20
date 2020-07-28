@@ -6,11 +6,11 @@ import javax.swing.text.TabExpander;
 //
 //DONE	1)Der Benutzer soll neue Objekte anlegen können.
 //		2)Objekte sollen anhand des Namens eindeutig identifizierbar sein.
-//		3)Objekte sollen folgende Bestandteile besitzen: eindeutiger Name,Freitext und eine beliebige Anzahl an Elementen mit Mengenangabe, Einheit und Bezeichnung.
+//DONE	3)Objekte sollen folgende Bestandteile besitzen: eindeutiger Name,Freitext und eine beliebige Anzahl an Elementen mit Mengenangabe, Einheit und Bezeichnung.
 //DONE?	4)Der Benutzer soll Objekte anhand der Bestandteile suchen können.
 //DONE	5)Der Benutzer soll Objekte löschen können.
 //		6)Der Benutzer soll Objekte bearbeiten können.
-//		7)Der Benutzer soll ein Objekt auswählen können,um diesesanzuzeigen.
+//so halb7)Der Benutzer soll ein Objekt auswählen können,um diesesanzuzeigen.
 //DONE	8)Die Anwendung soll eine Übersichtsliste aller Objekte anzeigen.
 //DONE	9)Die Anwendung soll beim Start automatisch alle gespeicherten Daten laden.
 //so halb		10)Die Anwendung soll eine grafische Übersicht über die nach Menge absteigend sortierten Elementen ausgeben können.

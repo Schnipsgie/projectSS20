@@ -1,6 +1,8 @@
 import java.util.Arrays;
 import java.util.Vector;
 import java.util.regex.Pattern;
+
+import javax.swing.JOptionPane;
 /**
  * Rezept Object
  * 
@@ -42,31 +44,36 @@ public class Rezept {
 	}
 	
 	protected Rezept(String line) {
-		String[] s = line.split(Pattern.quote( ";" ));
-		
-		Vector<String> ve = new Vector<String>(Arrays.asList(s));
-		//name setzen
-		if (ve.get(0) != null) {
-			setRezeptName(ve.get(0));
-			ve.remove(0);
-		}
-		// beschreibung setzen
-		if (ve.get(0) != null) {
-			setText(ve.get(0));
-			ve.remove(0);	
-		}
-		Vector<Zutat> zutatenVector = new Vector<Zutat>();
-		for (String cont : ve) {
-				String[] zua = cont.split(Pattern.quote( "," ));
-				Vector<String> splitZutat = new Vector<String>(Arrays.asList(zua));
+		try {
+			String[] s = line.split(Pattern.quote( ";" ));
+			
+			Vector<String> ve = new Vector<String>(Arrays.asList(s));
+			//name setzen
+			if (ve.get(0) != null) {
+				setRezeptName(ve.get(0));
+				ve.remove(0);
+			}
+			// beschreibung setzen
+			if (ve.get(0) != null) {
+				setText(ve.get(0));
+				ve.remove(0);	
+			}
+			Vector<Zutat> zutatenVector = new Vector<Zutat>();
+			for (String cont : ve) {
+					String[] zua = cont.split(Pattern.quote( "," ));
+					Vector<String> splitZutat = new Vector<String>(Arrays.asList(zua));
+					
+					if (splitZutat.size() == 3) {
+						Zutat zu = new Zutat(Integer.parseInt(splitZutat.get(0)), splitZutat.get(1), splitZutat.get(2));
+						zutatenVector.add(zu);
+					}
 				
-				if (splitZutat.size() == 3) {
-					Zutat zu = new Zutat(Integer.parseInt(splitZutat.get(0)), splitZutat.get(1), splitZutat.get(2));
-					zutatenVector.add(zu);
-				}
+			}
+			setZutaten(zutatenVector);
+		} catch (Exception e) {
+			System.out.println();
 			
 		}
-	    setZutaten(zutatenVector);
 	}
 	
 	public Rezept(String rname, String betext  , Vector<Zutat> zutaten) {
