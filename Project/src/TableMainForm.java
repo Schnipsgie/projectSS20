@@ -82,18 +82,25 @@ public class TableMainForm extends JFrame{
 				getFenster().setSize(600, 250);
 				//Menü
 				JMenuBar menuLeiste = new JMenuBar();
-				JMenu menuOptionBearbeiten = new JMenu("Bearbeiten");
 				
+				JMenu menuOptionBearbeiten = new JMenu("Bearbeiten");	
 				JMenu menuOptionStatistik = new JMenu("Statistik");
+				
+				JMenuItem menuItemDiagramm = new JMenuItem("Diagramm");
+				
 				JMenuItem menuItemAdd = new JMenuItem("Add");
 				JMenuItem menuItemRemove = new JMenuItem("Remove");
 				JMenuItem menuItemReload = new JMenuItem("Tabelle neu Laden");
 				JMenuItem menuItemSort = new JMenuItem("Sortieren");
+				
 				menuItemAdd.addActionListener(IH);
 				menuItemRemove.addActionListener(IH);
 				menuItemReload.addActionListener(IH);
 				menuItemSort.addActionListener(IH);
 				
+				menuItemDiagramm.addActionListener(IH);
+				
+				menuOptionStatistik.add(menuItemDiagramm);
 				menuOptionBearbeiten.add(menuItemAdd);
 				menuOptionBearbeiten.add(menuItemRemove);
 				menuOptionBearbeiten.add(menuItemReload);

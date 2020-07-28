@@ -37,7 +37,12 @@ public class InputHandler implements ActionListener{
 			
 			
 			
-	
+			
+		}
+		else if (event.getActionCommand() == "Diagramm") {
+			
+			BarChartForm barChart =  new BarChartForm(getMainForm().getRezeptListe());
+			
 		}
 		else if (event.getActionCommand() == "Tabelle neu Laden") {
 			getMainForm().reload();
