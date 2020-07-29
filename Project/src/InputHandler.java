@@ -1,10 +1,14 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 import javax.swing.JTextField;
 
@@ -65,9 +69,13 @@ public class InputHandler implements ActionListener{
 				}
 				
 			}
+			HashMap<String, Integer> result = unsortetMap.entrySet().stream()
+					.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))// reverse order f�r desc.
+					.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldValue, newValue) -> oldValue,
+							LinkedHashMap::new));
 			
+			BarChartForm barChart =  new BarChartForm(result);
 			
-			BarChartForm barChart =  new BarChartForm(unsortetMap);
 			
 		}
 		else if (event.getActionCommand() == "Tabelle neu Laden") {
