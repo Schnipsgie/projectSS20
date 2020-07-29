@@ -76,13 +76,13 @@ public class InputHandler implements ActionListener{
 			
 			
 		}
+		else if (event.getActionCommand() == "Änderungen Speichern") {
+		
+			getMainForm().save(); //Speichern 
+			getMainForm().reload(); //Neu Laden
+		}
 		else if (event.getActionCommand() == "Tabelle neu Laden") {
-			int row = getMainForm().getTable().getSelectedRow();
-			int column = getMainForm().getTable().getSelectedColumn();
-			
-			//System.out.println(getMainForm().getTable().getValueAt(row, column));
-			
-			getMainForm().save();
+
 			getMainForm().reload();
 		}
 		else if (event.getActionCommand() == "Remove") {

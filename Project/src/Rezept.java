@@ -43,6 +43,10 @@ public class Rezept {
 		
 	}
 	
+	public int getAnzZutaten() {
+		return zutaten.size();
+	}
+	
 	protected Rezept(String line) {
 		try {
 			String[] s = line.split(Pattern.quote( ";" ));

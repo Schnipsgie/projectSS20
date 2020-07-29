@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.JFrame;
@@ -87,7 +88,7 @@ public class TableMainForm extends JFrame{
 	public void generateTable(Vector<Rezept> rezeptListe) {
 		
 		 Vector<Vector> tableData = new Vector<Vector>();
-	        
+	        int maxZutaten = 0;
 	        //einzelne Spalte
 	        for (Rezept currentRezept : rezeptListe) {
 	        	Vector<String> baseList = new Vector<>(); 
@@ -95,16 +96,19 @@ public class TableMainForm extends JFrame{
 	        	baseList.add(currentRezept.getText());
 	        	baseList.addAll(currentRezept.getAllZuatatenAsString());
 	        	tableData.addElement(baseList);
+	        	if (currentRezept.getAnzZutaten() > maxZutaten) { 
+	        		maxZutaten = currentRezept.getAnzZutaten(); //maximale Anzahl an Zutaten die ein Rezept hat
+	        	}
 	        }
 	        
 	        Vector<String> columnNames = new Vector<String>();
 	        columnNames.addElement("Rezeptname");
 	        columnNames.addElement("Beschreibung");
-	        columnNames.addElement("Zutat 1");
-	        columnNames.addElement("Zutat 2");
-	        columnNames.addElement("Zutat 3");
-	        columnNames.addElement("Zutat 4");
-	        columnNames.addElement("Zutat 5");
+	        maxZutaten = maxZutaten+2; //Zusätzliche leere Spalte
+	        for (int i = 1; i < maxZutaten; i++) {
+	        	columnNames.addElement("Zutat "+ i); //Dynamische anpassung der Spalten an die Anzahl der Zutaten
+	        }
+	        
 	       
 	        TableModel model = new DefaultTableModel(tableData, columnNames);
 	        JTable table = new JTable (model);
@@ -139,11 +143,13 @@ public class TableMainForm extends JFrame{
 				JMenuItem menuItemAdd = new JMenuItem("Add");
 				JMenuItem menuItemRemove = new JMenuItem("Remove");
 				JMenuItem menuItemReload = new JMenuItem("Tabelle neu Laden");
+				JMenuItem menuItemSave = new JMenuItem("Änderungen Speichern");
 				JMenuItem menuItemSort = new JMenuItem("Sortieren");
 				
 				menuItemAdd.addActionListener(IH);
 				menuItemRemove.addActionListener(IH);
 				menuItemReload.addActionListener(IH);
+				menuItemSave.addActionListener(IH);
 				menuItemSort.addActionListener(IH);
 				
 				menuItemDiagramm.addActionListener(IH);
@@ -152,6 +158,7 @@ public class TableMainForm extends JFrame{
 				menuOptionBearbeiten.add(menuItemAdd);
 				menuOptionBearbeiten.add(menuItemRemove);
 				menuOptionBearbeiten.add(menuItemReload);
+				menuOptionBearbeiten.add(menuItemSave);
 				menuOptionBearbeiten.add(menuItemSort);
 			    menuLeiste.add(menuOptionBearbeiten);
 			    menuLeiste.add(menuOptionStatistik);
