@@ -69,10 +69,8 @@ public class InputHandler implements ActionListener{
 				}
 				
 			}
-			HashMap<String, Integer> result = unsortetMap.entrySet().stream()
-					.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))// reverse order f�r desc.
-					.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldValue, newValue) -> oldValue,
-							LinkedHashMap::new));
+			HashMap<String, Integer> result = unsortetMap.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+					.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldValue, newValue) -> oldValue,LinkedHashMap::new));
 			
 			BarChartForm barChart =  new BarChartForm(result);
 			
